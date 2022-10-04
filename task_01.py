@@ -21,7 +21,7 @@ def math_operation(num1, operation, num2):
         return num1 / num2
 
     else:
-        print('Unrecognised operator')
+        return None
 
 
 if __name__ == '__main__':
