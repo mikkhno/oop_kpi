@@ -5,13 +5,11 @@ parser.add_argument('f_string', type=str)
 args = parser.parse_args()
 
 
-# bool function for validating
+# bool function for validating the expression
 def checking():
-    # adding recognisable signs as operators
+    # adding recognisable signs as the simple math operations
     signs = ('+', '-')
     previous_symbol = ''
-    # adding bool for validating the string
-    is_valid = True
 
     # checking if symbol is numeric or sign, order and if it is not the end of string
     if args.f_string:
@@ -19,12 +17,11 @@ def checking():
             if symbol.isnumeric() or (symbol in signs and previous_symbol.isnumeric() and symbol != args.f_string[-1]):
                 previous_symbol = symbol
             else:
-                is_valid = False
-                break
+                return False
     else:
-        is_valid = False
+        return False
 
-    return is_valid
+    return True
 
 
 def main():
