@@ -10,11 +10,18 @@ def math():
     parser.add_argument('num2', type=float)
     args = parser.parse_args()
 
+    # we are checking if there is no dividing by zero
+    if (args.operators == 'truediv' or args.operators == 'floordiv') and (args.num1 == 0 or args.num2 == 0):
+        print('Dividing by zero.')
+        return 0
+
     performing = getattr(math, args.operators, None)
 
+    # we are checking library compatibility
     if not performing:
         performing = getattr(operator, args.operators, None)
 
+    # if we have unrecognised operation, this condition will inform us, otherwise showing the results
     if not performing:
         print('Math operation has not been detected.')
         return None
