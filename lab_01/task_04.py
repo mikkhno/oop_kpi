@@ -1,47 +1,50 @@
 import argparse
 
 parser = argparse.ArgumentParser(description='knapsack_game')
-parser.add_argument('-W', '--capacity', type=int)
-parser.add_argument('-w', '--weight', type=list, nargs='+')
-parser.add_argument('-n', '--amount', type=int)
+parser.add_argument('-W', dest='capacity', type=int)
+parser.add_argument('-w', dest='weight', type=list, nargs='+')
 args = parser.parse_args()
 
 
-def knapsack(n, w, c):
+def datacheck(w, capacity):
+    if any(weight <= 0 for weight in w):
+        print('Weight of some of the bars must be greater than 0.')
+        return False
+    if any(weight == weight for weight in w):
+        print('Fractions of bar are not allowed.')
+        return False
+    if capacity <= 0:
+        print('It seems your knapsack has a big hole inside. Please, try to set another capacity, '
+              '  at least greater than 0.')
+        return False
+    return True
+
+
+def knapsack_solution(w, capacity):
     """
-    :param int n: number of items
     :param list w: weights of items
-    :param int c: capacity of knapsack
+    :param int capacity: capacity(kg) of knapsack
     """
-    # list_e = [[0 for x in range(n)] for y in range(c)]
-    #
-    # for i in range(1, n + 1):
-    #     for a in range(1, c + 1):
-    #         if w[i] > a:
-    #             list_e[i][a] = list_e[i - 1][a]
-    #         else:
-    #             if (w[i] + list_e[i - 1][c - w[i]]) > list_e[i - 1][a]:
-    #                 list_e[i][a] = w[i] + list_e[i - 1][a - w[i]]
-    #             else:
-    #                 list_e[i][a] = list_e[i - 1][a]
+    n = len(w)
+    weight = [0] + w
+    table = [[0 for x in range(n)] for y in range(capacity + 1)]
 
-    # return list_e[n][a]
+    for i in range(1, n):
+        for j in range(1, capacity + 1):
+            if weight[i] <= j:
+                table[j][i] = max(table[j - weight[i]][i - 1] + weight[i], table[j][i - 1])
 
-    max_weight = [[w[x] for x in range(n)] for y in range(c)]
+    return table[-1][-1]
 
-    for i in range(1, n + 1):
-        for k in range(1, c + 1):
-            if max_weight[i][k] > c:
-                max_weight[i][k] = max_weight[i - 1][k]
-            else:
-                if (max_weight[i][k] + max_weight[i - 1][c - max_weight[i][k]]) > max_weight[i - 1][k]:
-                    max_weight[i][k] = max_weight[i][k] + max_weight[i - 1][c - max_weight[i][k]]
-                else:
-                    max_weight[i][k] = max_weight[i - 1][k]
 
-    return max_weight[i][k]
+def main():
+    datacheck(args.capacity, args.weight)
+    if not datacheck(args.capacity, args.weight):
+        return 0
+    else:
+        print(knapsack_solution(args.capacity, args.weight))
 
 
 if __name__ == '__main__':
-    w = [5, 3, 1, 7]
-    print(knapsack(4, w, 10))
+    main()
+
