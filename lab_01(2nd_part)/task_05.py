@@ -11,6 +11,7 @@ class Student:
     def rec_book(self):
         return self.__rec_book
 
+    # checking accuracy of entered vital data
     @rec_book.setter
     def rec_book(self, number):
         if not isinstance(number, int):
@@ -26,6 +27,7 @@ class Student:
     def grades(self):
         return self.__grades
 
+    # checking accuracy of entered vital data
     @grades.setter
     def grades(self, grade_list):
         for grade in grade_list:
@@ -36,30 +38,6 @@ class Student:
     @grades.getter
     def grades(self):
         return self.__grades
-
-    @property
-    def name(self):
-        return self.__name
-
-    @name.setter
-    def name(self, name):
-        self.__name = name
-
-    @name.getter
-    def name(self):
-        return self.__name
-
-    @property
-    def surname(self):
-        return self.__surname
-
-    @surname.setter
-    def surname(self, surname):
-        self.__surname = surname
-
-    @surname.getter
-    def surname(self):
-        return self.__surname
 
     def average(self):
         return sum(self.grades) / len(self.grades)
@@ -75,6 +53,7 @@ class Group:
         self.st_list = []
         self.max_stud = 20
 
+    # checking accuracy of entered vital data
     def adds(self, student):
         if not isinstance(student, Student):
             raise Exception('There is no such a student.')
@@ -85,6 +64,7 @@ class Group:
 
         self.st_list.append(student)
 
+    # evaluating top five
     def five_rated(self):
         return sorted(map(Student.average, self.st_list), key=max, reverse=True)[:5]
 
