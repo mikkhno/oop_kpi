@@ -48,10 +48,9 @@ class Student:
 
 class Group:
 
-    def __init__(self, group_name):
+    def __init__(self, group_name, max_stud = 20):
         self.group_name = group_name
         self.st_list = []
-        self.max_stud = 20
 
     # checking accuracy of entered vital data
     def adds(self, student):
