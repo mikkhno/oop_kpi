@@ -86,7 +86,7 @@ class Group:
         self.st_list.append(student)
 
     def five_rated(self):
-        return sorted(map(Student.average, self.st_list), key=lambda x: x[1], reverse=True)[:5]
+        return sorted(map(Student.average, self.st_list), key=max, reverse=True)[:5]
 
 
 def main():
