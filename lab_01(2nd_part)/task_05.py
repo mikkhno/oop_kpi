@@ -85,10 +85,8 @@ class Group:
 
         self.st_list.append(student)
 
-
     def five_rated(self):
-        top_list = sorted(map(Student.average, self.st_list), key=lambda x: x[1], reverse=True)
-        return top_list[:5]
+        return sorted(map(Student.average, self.st_list), key=lambda x: x[1], reverse=True)[:5]
 
 
 def main():
@@ -101,7 +99,7 @@ def main():
     group.adds(Student('Kostyantyn', 'Pyrohov', 'MF-20', 1226, [5, 5, 5, 5, 4]))
     group.adds(Student('Ilona', 'Pakholka', 'MF-20', 1227, [5, 5, 5, 5, 5]))
     five_rated = group.five_rated()
-    print('\n'.join([''.join(str(j) for j in i) for i in five_rated]))
+    print(five_rated)
 
 
 if __name__ == '__main__':
