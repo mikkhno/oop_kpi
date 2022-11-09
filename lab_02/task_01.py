@@ -13,9 +13,10 @@ s = 'F'
 # ticket type
 tt = ['Normal', 'Advanced', 'Student', 'Late']
 
+price = 100
 
-class BasedTicket:
-    def __init__(self, price, ttype='Normal'):
+class NormalTicket:
+    def __init__(self, price, ttype):
         self.ser_num = None
         self.price = price
         self.ttype = ttype
@@ -32,39 +33,63 @@ class BasedTicket:
         info = sn.split(s)
         for item in range(len(tt)):
             if info[0] == tt[item][:1]:
-                print(tt[item])
+                print("Ticket type:", tt[item])
+
         date = info[1].split(ds)
-        print(date, sep='/')
+        print("Purchase date:")
+        for i in range(len(date)):
+            print(date[i], end="/")
+        print()
+
         time = info[2].split(ts)
-        print(time, sep=':')
+        print("Purchase time:")
+        for i in range(len(time)):
+            print(time[i], end=':')
+        print()
 
 
     def __str__(self):
         self.sgen()
         self.sn_reader(self.ser_num)
-        return f'SN:{self.ser_num}\nTicket:{self.ttype}\nPrice:{self.price}'
+        return f'SerialNumber:{self.ser_num}\nPrice:{self.price}'
 
 
-class AdvancedDiscount(BasedTicket):
+class AdvancedTicket(NormalTicket):
     def __init__(self, price, ttype):
         super().__init__(price, ttype)
         self.price = 0.6 * self.price
         self.ttype = 'Advanced'
 
 
-class StudentDiscount(BasedTicket):
+class StudentTicket(NormalTicket):
     def __init__(self, price, ttype):
         super().__init__(price, ttype)
         self.price = 0.5 * self.price
         self.ttype = 'Student'
 
 
-class LateTicket(BasedTicket):
+class LateTicket(NormalTicket):
     def __init__(self, price, ttype):
         super().__init__(price, ttype)
         self.price = 1.1 * self.price
         self.ttype = 'Late'
 
 
-ticket = AdvancedDiscount(60, 'Normal')
+choice = int(input("Which ticket do you want to buy?\n1 - Normal  2 - Advanced  3 - Student  4 - Late\n"))
+match choice:
+    case 1:
+        ticket = NormalTicket(price,'Normal')
+    case 2:
+        ticket = AdvancedTicket(price,'Normal')
+    case 3:
+        ticket = StudentTicket(price,'Normal')
+    case 4:
+        ticket = LateTicket(price,'Normal')
+    case _:
+        print('Your choice has not been recognised.')
+
+print("Take your ticket and enjoy the IT-event!")
 print(ticket)
+
+
+
