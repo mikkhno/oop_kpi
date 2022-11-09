@@ -1,0 +1,5 @@
+Monday:Margherita
+Tuesday:Bacon
+Wednesday:Chili
+Thursday:Vegan
+Friday:Salami
