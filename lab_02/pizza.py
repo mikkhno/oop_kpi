@@ -31,7 +31,7 @@ class Pizza:
 
     def __str__(self):
         self.summarizing()
-        return f'You are ordering {self.pizza} pizza\ningredients:{self.ingredients}\ntotal:{self.total}€'
+        return f'*{self.pizza} pizza*\ningredients:{self.ingredients}\ntotal:{self.total}€'
 
 
 class Margherita(Pizza):
@@ -67,7 +67,3 @@ class Salami(Pizza):
         super().__init__()
         self.pizza = __class__.__name__
         super().add_in('cheese', 'salami', 'pepperoni')
-
-
-#pizza = Salami()
-#print(pizza)
