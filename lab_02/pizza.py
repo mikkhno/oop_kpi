@@ -1,3 +1,4 @@
+# ingredient dict
 ingredient = {
     'dough': 0.5,
     'tomato_sauce': 0.35,
@@ -11,6 +12,7 @@ ingredient = {
 }
 
 
+# parent class
 class Pizza:
     def __init__(self):
         self.pizza = __class__.__name__
@@ -27,7 +29,6 @@ class Pizza:
         for i in range(len(self.ingredients)):
             self.total += ingredient.get(self.ingredients[i])
         return self.total
-
 
     def __str__(self):
         self.summarizing()
