@@ -1,10 +1,6 @@
 import math
 from fractions import Fraction
 
-#   final overview(1):
-#   1/4 + 5/4 [Enter]
-#   |result:3/2 or 1.5
-
 operations = ["+", "-", "/", "*", "?"]
 
 
@@ -30,7 +26,35 @@ class Operation:
             self.__sign = op
 
         @sign.getter
+        def sign(self):
+            return self.__sign
+
+        @property
+        def den1(self):
+            return self.__den1
+
+        @den1.setter
+        def den1(self, n):
+            if n == 0:
+                raise ZeroDivisionError()
+            self.__den1 = n
+
+        @den1.getter
+        def den1(self):
+            return self.__den1
+
+        @property
         def den2(self):
+            return self.__den2
+
+        @den2.setter
+        def den2(self, n):
+            if n == 0:
+                raise ZeroDivisionError()
+            self.__den2 = n
+
+        @den2.getter
+        def den1(self):
             return self.__den2
 
     def operation(self):
