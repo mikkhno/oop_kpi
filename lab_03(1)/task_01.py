@@ -41,27 +41,25 @@ class Operation:
 
     def operation(self):
         if self.sign == "+":
-            return (Fraction(self.num1, self.den1) + Fraction(self.num2, self.den2))
+            return Fraction(self.num1, self.den1) + Fraction(self.num2, self.den2)
 
         if self.sign == "-":
-            return (self.num1, self.den1 - Fraction(self.num2, self.den2))
+            return self.num1, self.den1 - Fraction(self.num2, self.den2)
 
         if self.sign == "/":
-            return (Fraction(self.num1,self.den1) / Fraction(self.num2,self.den2))
+            return Fraction(self.num1,self.den1) / Fraction(self.num2,self.den2)
 
         if self.sign == "*":
-            return (Fraction(self.num1, self.den1) * Fraction(self.num2, self.den2))
+            return Fraction(self.num1, self.den1) * Fraction(self.num2, self.den2)
 
         if self.sign == "?":
-            return max(Fraction(self.num1, self.den1),
-                  Fraction(self.num2,self.den2))
+            return max(Fraction(self.num1, self.den1), Fraction(self.num2,self.den2))
 
         raise TypeError("Operation is not found.")
 
     def __str__(self):
 
         return f'result: {self.operation()}'
-
 
 
 def main():
