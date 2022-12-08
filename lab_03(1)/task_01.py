@@ -1,4 +1,3 @@
-import math
 from fractions import Fraction
 
 operations = ["+", "-", "/", "*", "?"]
@@ -11,23 +10,6 @@ class Operation:
         self.den1 = den1
         self.den2 = den2
         self.sign = sign
-        self.result = 0
-
-        @property
-        def sign(self):
-            return self.__sign
-
-        @sign.setter
-        def sign(self, op):
-            if not isinstance(op, str):
-                raise TypeError()
-            if not op in operations:
-                raise TypeError("Operation is not found.")
-            self.__sign = op
-
-        @sign.getter
-        def sign(self):
-            return self.__sign
 
         @property
         def den1(self):
@@ -59,24 +41,27 @@ class Operation:
 
     def operation(self):
         if self.sign == "+":
-            self.result = (Fraction(self.num1, self.den1) + Fraction(self.num2, self.den2))
+            return (Fraction(self.num1, self.den1) + Fraction(self.num2, self.den2))
 
         if self.sign == "-":
-            self.result = (self.num1, self.den1 - Fraction(self.num2, self.den2))
+            return (self.num1, self.den1 - Fraction(self.num2, self.den2))
 
         if self.sign == "/":
-            self.result = (Fraction(self.num1,self.den1) / Fraction(self.num2,self.den2))
+            return (Fraction(self.num1,self.den1) / Fraction(self.num2,self.den2))
 
         if self.sign == "*":
-            self.result = (Fraction(self.num1, self.den1) * Fraction(self.num2, self.den2))
+            return (Fraction(self.num1, self.den1) * Fraction(self.num2, self.den2))
 
         if self.sign == "?":
-            self.result = max(Fraction(self.num1, self.den1),
+            return max(Fraction(self.num1, self.den1),
                   Fraction(self.num2,self.den2))
 
+        raise TypeError("Operation is not found.")
+
     def __str__(self):
-        self.operation()
-        return f'result: {self.result}'
+
+        return f'result: {self.operation()}'
+
 
 
 def main():
