@@ -17,3 +17,36 @@ def start(m, res=False):
     markup.add(item1)
     markup.add(item2)
     markup.add(item3)
+
+
+# Formatting, cleaning and pasting requested information.
+@bot.message_handler(commands=["Look up..."])
+def getwiki(s):
+    try:
+        # Adding a page with requested meaning.
+        ny = wikipedia.page(s)
+        # Getting information(max. 1000 symbols).
+        wikitext = ny.content[:1000]
+        # Split sentences with dots.
+        wiki_array = wikitext.split('.')
+        # Removing extra sentences.
+        wiki_array = wiki_array[:-1]
+        # Creating empty variable for the text.
+        wikitext2 = ''
+        # Formatting text to avoid unexpected operations with attribution.
+        for x in wiki_array:
+            if not ('==' in x):
+                # When we have a sentence more with 3 symbols, we are returning it with lost dots.
+                if (len((x.strip())) > 3):
+                        wikitext2 = wikitext2 + x + '.'
+                else:
+                    break
+        # Deleting unnecessary elements from text.
+        wikitext2 = re.sub('\([^()]*\)', '', wikitext2)
+        wikitext2 = re.sub('\([^()]*\)', '', wikitext2)
+        wikitext2 = re.sub('\{[^\{\}]*\}', '', wikitext2)
+        # Returning formatted and cleaned information as a text.
+        return wikitext2
+        # Exception in case the information is not found.
+    except Exception as e:
+        return 'The meaning of the word you are looking for is not found.'
