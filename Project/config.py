@@ -1,5 +1,4 @@
-import telebot, wikipedia, re, random
-from telebot import types
+import telebot, wikipedia, re
 # Setting the API-ID
 bot = telebot.TeleBot('5606399410:AAFghKqT1JV0bWP_cghk87xOEElVZODyrm4')
 # Setting the language
