@@ -8,20 +8,20 @@ wikipedia.set_lang("en")
 
 @bot.message_handler(commands=["start"])
 def start(m, res=False):
-    # Adding three optional buttons
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("Look up...")
-    item2 = types.KeyboardButton("Fact")
-    item3 = types.KeyboardButton("Random meaning")
 
-    markup.add(item1)
-    markup.add(item2)
-    markup.add(item3)
+    bot.send_message(m.chat.id, 'Write your word ->')
 
 
-# Formatting, cleaning and pasting requested information.
-@bot.message_handler(commands=["Look up..."])
+# Showing found information.
+@bot.message_handler(content_types=["text"])
+def handle_text(message):
+    bot.send_message(message.chat.id, getwiki(message.text))
+
+
+# Looking for an information about the given word.
+@bot.message_handler(commands=["lookup"])
 def getwiki(s):
+    # Formatting, cleaning and pasting requested information.
     try:
         # Adding a page with requested meaning.
         ny = wikipedia.page(s)
@@ -50,3 +50,7 @@ def getwiki(s):
         # Exception in case the information is not found.
     except Exception as e:
         return 'The meaning of the word you are looking for is not found.'
+
+
+# Launching the bot.
+bot.polling(none_stop=True, interval=0)
