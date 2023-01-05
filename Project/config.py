@@ -6,9 +6,9 @@ bot = telebot.TeleBot('5606399410:AAFghKqT1JV0bWP_cghk87xOEElVZODyrm4')
 wikipedia.set_lang("en")
 
 
+# Starting the bot.
 @bot.message_handler(commands=["start"])
 def start(m, res=False):
-
     bot.send_message(m.chat.id, 'Write your word ->')
 
 
